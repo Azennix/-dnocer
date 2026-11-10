@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dnocer"
+version = "1.0.0"
+description = "Project-wide developer intelligence and safe repair companion"
+requires-python = ">=3.11"
+dependencies = ["typer>=0.12", "rich>=13.7", "anthropic>=0.40"]
+readme = "README.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+dnocer = "dnocer.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

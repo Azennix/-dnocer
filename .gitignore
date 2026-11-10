@@ -1,0 +1,11 @@
+﻿.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.dnocer/
+dist/
+build/
+*.egg-info/
+*.backup
+*.release-backup

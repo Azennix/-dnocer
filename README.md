@@ -12,7 +12,7 @@
 ![Python](https://img.shields.io/badge/python-3.11%2B-yellow?style=for-the-badge&logo=python&logoColor=white)
 ![Interface](https://img.shields.io/badge/interface-CLI-green?style=for-the-badge)
 ![AI](https://img.shields.io/badge/AI-optional-purple?style=for-the-badge)
-![Local First](https://img.shields.io/badge/local--first-yes-orange?style=for-the-badge)
+
 
 **A product by Azennix AI**
 

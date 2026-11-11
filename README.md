@@ -1,589 +1,415 @@
 <div align="center">
-  <img src="src/dnocer/assets/dnocer-terminal-animal.png" alt="DNOCER animal logo" width="230" />
-  <h1>DNOCER</h1>
-  <p><strong>Evidence before assumptions · Approval before action · Verification before success</strong></p>
 
+<img src="src/dnocer/assets/dnocer-terminal-animal.png" alt="DNOCER animal logo" width="200" />
+
+# 🛡️ DNOCER
 
 ### Project Intelligence & Safe Repair Companion
 
+**🔎 Evidence before assumptions · ✅ Approval before action · 🧪 Verification before success**
 
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.11%2B-yellow?style=for-the-badge&logo=python&logoColor=white)
+![Interface](https://img.shields.io/badge/interface-CLI-green?style=for-the-badge&logo=gnometerminal&logoColor=white)
+![AI](https://img.shields.io/badge/AI-optional-purple?style=for-the-badge)
+![Local First](https://img.shields.io/badge/local--first-yes-orange?style=for-the-badge)
 
 **A product by Azennix AI**
 
-> Your Companion. Your Capability. Your Control.
+*Your Companion. Your Capability. Your Control.*
 
-DNOCER is a command-line developer companion designed to help developers understand software problems, investigate potential root causes, inspect test failures, review code improvements, and maintain control over changes made to their projects.
-
-It combines deterministic development tools with optional AI-assisted investigation.
-
-Its central principle is simple:
-
-**Understand the problem before changing the code. Review the change before applying it. Verify the result after applying it.**
+</div>
 
 ---
 
-## 1. Why DNOCER Exists
+DNOCER is a **command-line developer companion**. It helps you understand software problems, find likely root causes, inspect test failures, review code fixes, and **stay in control of every change** made to your project.
 
-Software development involves more than writing code.
+It combines **deterministic tools** (Ruff, pytest, Python parser) with **optional AI investigation**.
 
-Developers regularly encounter:
-
-- Syntax and runtime errors.
-- Unexpected application behavior.
-- Dependency and configuration problems.
-- Linting and code-quality issues.
-- Test failures.
-- Unclear root causes.
-- Repeated debugging workflows.
-- Risky code modifications.
-
-For experienced developers, identifying these problems can still consume considerable time.
-
-For beginners and students, understanding why something failed can be even more difficult.
-
-DNOCER aims to reduce the gap between encountering a problem and understanding how to resolve it.
-
-It is designed to make developers more capable, rather than encourage blind dependence on generated code.
-
-## 2. What DNOCER Does
-
-DNOCER provides a collection of developer workflows through a terminal interface.
-
-Its capabilities include:
-
-1. Project scanning and diagnostic collection.
-2. Structured issue reporting.
-3. Local explanations of detected problems.
-4. Optional AI-assisted investigation.
-5. Risk-pattern identification.
-6. Test execution and result analysis.
-7. Reviewable repair proposals.
-8. Approval-controlled modifications.
-9. Repair history and rollback.
-
-DNOCER works alongside existing development tools rather than attempting to replace them.
-
-## 3. Core Design Principles
-
-### Evidence before explanation
-
-A diagnosis should be grounded in available evidence.
-
-Examples include:
-
-- Source file locations.
-- Diagnostic rule identifiers.
-- Parser results.
-- Linter output.
-- Test execution results.
-- Error messages.
-
-An explanation should not be presented as a confirmed fact when the evidence only supports a hypothesis.
-
-### Deterministic before generative
-
-DNOCER uses conventional development tools for checks where possible.
-
-Examples include:
-
-- Python syntax parsing.
-- Ruff diagnostics.
-- Existing test frameworks.
-
-AI is an optional additional investigation layer, not a replacement for deterministic checks.
-
-### Human authorization
-
-DNOCER is designed around user control.
-
-A repair proposal should be visible before a consequential file modification.
-
-The user must decide whether to approve the proposed change.
-
-### System authorization
-
-Technical safety boundaries are separate from human approval.
-
-The system determines which operations are technically permitted, which paths are within scope, and which validations are required.
-
-User approval must not bypass technical safety restrictions.
-
-### Verifiable outcomes
-
-A suggested repair is not automatically a successful repair.
-
-DNOCER distinguishes between proposing a change, applying it, and validating its outcome.
-
-### Local-first operation
-
-The core diagnostic workflow is designed to operate locally.
-
-AI-assisted operations are optional and require explicit consent before selected project context is sent to the configured provider.
+> [!IMPORTANT]
+> **Understand the problem → Review the change → Verify the result.**
+> That is the whole idea behind DNOCER.
 
 ---
 
-## 4. Command-Line Interface
+## ⚡ Quick Start
 
-DNOCER uses Typer for command handling and Rich for terminal presentation.
+```powershell
+# 1. Install
+python -m pip install dnocer-1.0.0-py3-none-any.whl
 
-The CLI provides structured output, interactive confirmations, tables, panels, and diagnostic summaries.
+# 2. Check it works
+dnocer version
+dnocer --help
 
-The implemented command interface includes the following workflows.
+# 3. Scan your project
+dnocer scan .
+```
 
-| Command | Responsibility |
+> [!TIP]
+> Requirements: **Python 3.11+** and Windows PowerShell / CMD (or any compatible terminal). An Anthropic API key is **only** needed for AI features.
+
+---
+
+## 📑 Table of Contents
+
+1. [Why DNOCER exists](#-why-dnocer-exists)
+2. [What DNOCER does](#-what-dnocer-does)
+3. [Core principles](#-core-principles)
+4. [Commands](#-commands)
+5. [How each workflow works](#-how-each-workflow-works)
+6. [Architecture](#-architecture)
+7. [AI integration](#-ai-integration)
+8. [Safety model](#-safety-model)
+9. [Tech stack](#-tech-stack)
+10. [Installation](#-installation)
+11. [Limitations](#-limitations)
+12. [IRABRAIN](#-relationship-with-irabrain)
+13. [Release info](#-release-info)
+
+---
+
+## 🤔 Why DNOCER Exists
+
+Developers deal with these problems every day:
+
+| 🐞 Problem | 😓 Pain |
 |---|---|
-| `dnocer scan` | Analyze a project and display findings |
-| `dnocer test` | Execute tests and analyze results |
-| `dnocer hunt` | Investigate selected risky code patterns |
-| `dnocer fix` | Preview and apply approved repairs |
-| `dnocer auto` | Coordinate supported diagnostic and repair workflows |
-| `dnocer undo` | Reverse a recorded repair |
-| `dnocer history` | Display repair history |
-| `dnocer version` | Display the installed version |
-Use:
+| Syntax and runtime errors | Hard to find the real cause |
+| Dependency and config issues | Time-consuming |
+| Lint and code-quality issues | Easy to ignore |
+| Test failures | Unclear why they fail |
+| Risky code changes | Fear of breaking things |
+
+For **beginners**, understanding *why* something failed is even harder.
+
+DNOCER closes the gap between **"something broke"** and **"I understand how to fix it"**, and makes you a *more capable* developer instead of one who blindly depends on generated code.
+
+---
+
+## 🧰 What DNOCER Does
+
+| # | Capability |
+|---|---|
+| 1 | 🔍 Project scanning and diagnostics |
+| 2 | 📋 Structured issue reporting |
+| 3 | 💡 Local explanations of problems |
+| 4 | 🤖 Optional AI-assisted investigation |
+| 5 | ⚠️ Risk-pattern identification |
+| 6 | 🧪 Test execution and result analysis |
+| 7 | 🛠️ Reviewable repair proposals |
+| 8 | ✅ Approval-controlled modifications |
+| 9 | ⏪ Repair history and rollback |
+
+DNOCER works **alongside** your existing tools. It does not replace them.
+
+---
+
+## 🧭 Core Principles
+
+### 🔎 Evidence before explanation
+Every diagnosis should be backed by evidence: file locations, rule IDs, parser results, linter output, test results, error messages.
+
+> [!NOTE]
+> If the evidence only supports a *guess*, DNOCER must not present it as a *confirmed fact*.
+
+### ⚙️ Deterministic before generative
+Conventional tools do the checks first: **Python syntax parsing**, **Ruff**, **existing test frameworks**. AI is an extra layer, never a replacement.
+
+### 🙋 Human authorization
+You see a repair proposal **before** any file is changed, and **you** decide whether to approve it.
+
+### 🔒 System authorization
+Technical safety rules (allowed paths, validation, execution limits) are **separate** from your approval.
+
+> [!WARNING]
+> User approval can **never** bypass technical safety restrictions.
+
+### ✅ Verifiable outcomes
+Proposing a fix ≠ applying a fix ≠ a *successful* fix. DNOCER treats these as three different steps.
+
+### 🏠 Local-first
+Core diagnostics run **locally**. AI features are optional and ask for **explicit consent** before any project context is sent out.
+
+---
+
+## 💻 Commands
+
+Built with **Typer** (commands) and **Rich** (colorful terminal output).
+
+| Command | What it does |
+|---|---|
+| `dnocer scan` | 🔍 Analyze a project and show findings |
+| `dnocer test` | 🧪 Run tests and analyze results |
+| `dnocer hunt` | 🎯 Investigate risky code patterns |
+| `dnocer fix` | 🛠️ Preview and apply approved repairs |
+| `dnocer auto` | 🤝 Coordinate supported scan + repair workflows |
+| `dnocer undo` | ⏪ Reverse a recorded repair |
+| `dnocer history` | 📜 Show repair history |
+| `dnocer version` | 🏷️ Show installed version |
 
 ```powershell
 dnocer --help
 ```
 
-to inspect the commands registered in your installed version.
+---
+
+## 🔬 How Each Workflow Works
+
+<details open>
+<summary><b>🔍 Project Scanning</b> — <code>dnocer scan .</code></summary>
+
+<br>
+
+Examines your project using supported diagnostic checks and shows findings in a structured format. It is **diagnostic only**, not an automatic repair.
+
+Each finding can include: title, severity, diagnostic code, file and line, description, impact, recommended action, prevention tips, detection source, and whether a repair is available.
+
+</details>
+
+<details>
+<summary><b>🧪 Test Intelligence</b> — <code>dnocer test .</code></summary>
+
+<br>
+
+Runs your project tests and analyzes the output: passed, failed, errors, skipped, warnings, failure locations, and exception info.
+
+It also tells **different states apart** instead of calling everything a "failure":
+
+| State | Meaning |
+|---|---|
+| 🟢 Tests passed | All good |
+| 🔴 Tests failed | Real test failures |
+| 🟡 Runner unavailable | pytest not found or not usable |
+| 🟡 No tests found | Nothing to run |
+| 🟠 Timed out | Execution took too long |
+
+```powershell
+dnocer test . --verbose   # more detail
+dnocer test . --ai        # optional AI investigation
+```
+
+</details>
+
+<details>
+<summary><b>🎯 Risk Investigation</b> — <code>dnocer hunt .</code></summary>
+
+<br>
+
+Finds risky code patterns from the project's findings:
+
+- Bare exception handling
+- Broad exception handling
+- Mutable default arguments
+- Selected related patterns
+
+```powershell
+dnocer hunt . --ai   # optional AI-assisted review
+```
+
+> [!NOTE]
+> AI output is **advisory**, not automatically confirmed.
+
+</details>
+
+<details>
+<summary><b>🛠️ Controlled Repair</b> — <code>dnocer fix .</code></summary>
+
+<br>
+
+```text
+ 1. Identify a repairable finding
+ 2. Generate a repair proposal
+ 3. Show the proposed changes
+ 4. Ask for YOUR approval
+ 5. Apply the approved proposal
+ 6. Preserve the original file
+ 7. Record the operation
+ 8. Let you inspect or reverse it
+```
+
+> [!CAUTION]
+> A repair is **never** "successful" just because a suggestion was generated.
+
+</details>
+
+<details>
+<summary><b>🤝 Automated Repair</b> — <code>dnocer auto .</code></summary>
+
+<br>
+
+Coordinates supported scanning and repair steps. It does **not** mean unrestricted autonomous editing. **Each repair needs your individual approval.**
+
+</details>
+
+<details>
+<summary><b>📜 History</b> — <code>dnocer history .</code></summary>
+
+<br>
+
+Records: change ID, timestamp, file, diagnostic rule, repair status, and verification info.
+
+</details>
+
+<details>
+<summary><b>⏪ Rollback</b> — <code>dnocer undo .</code></summary>
+
+<br>
+
+Uses saved repair info and backups to reverse recorded changes.
+
+> [!TIP]
+> Rollback is a safety net, but still keep your **own project backups**.
+
+</details>
 
 ---
 
-## 5. How the Workflows Operate
+## 🏗️ Architecture
 
-### 5.1 Project Scanning
+| Layer | Responsibility | File |
+|---|---|---|
+| 🖥️ **CLI** | Commands, arguments, prompts, approvals, terminal output | `src/dnocer/cli.py` |
+| ⚙️ **Core** | Scanning, context collection, test execution, repair proposal/apply, history, rollback | `src/dnocer/core.py` |
+| 🧠 **Intelligence** | Failure investigation, root-cause explanations, optional AI analysis | — |
+| 🔌 **External tools** | Ruff for lint/repair, pytest for tests (via subprocess) | — |
+| 💾 **Local state** | Repair history and backups in the `.dnocer` folder | `.dnocer/` |
 
-```powershell
-dnocer scan .
-```
-
-The scan workflow examines the selected project using supported diagnostic checks.
-
-Its purpose is to identify problems and present findings in a structured format.
-
-A finding can contain:
-
-- Issue title.
-- Severity.
-- Diagnostic code.
-- File and line location.
-- Description.
-- Explanation of impact.
-- Recommended action.
-- Prevention guidance.
-- Detection source.
-- Repair availability.
-
-Scanning is intended to be diagnostic rather than an automatic repair operation.
-
-### 5.2 Test Intelligence
-
-```powershell
-dnocer test .
-```
-
-DNOCER runs the supported project test workflow and analyzes the resulting output.
-
-Its test analysis can extract:
-
-- Passed tests.
-- Failed tests.
-- Errors.
-- Skipped tests.
-- Warnings.
-- Available failure locations.
-- Exception information.
-
-The test workflow distinguishes execution outcomes rather than treating every unsuccessful run as an ordinary test failure.
-
-Examples of important states include:
-
-- Tests passed.
-- Tests failed.
-- Test runner unavailable.
-- No tests found.
-- Execution timed out.
-
-Use verbose output when more execution detail is needed:
-
-```powershell
-dnocer test . --verbose
-```
-
-Optional AI investigation:
-
-```powershell
-dnocer test . --ai
-```
-
-### 5.3 Risk Investigation
-
-```powershell
-dnocer hunt .
-```
-
-Hunt identifies selected risky code patterns from the project's findings.
-
-The implemented risk candidates include:
-
-- Bare exception handling.
-- Broad exception handling.
-- Mutable default arguments.
-- Selected related diagnostic patterns.
-
-Optional AI-assisted review:
-
-```powershell
-dnocer hunt . --ai
-```
-
-AI investigation provides additional analysis. Its output should be treated as advisory rather than automatically confirmed.
-
-
-
-### 5.5 Controlled Repair
-
-DNOCER's repair workflow is designed around review and approval.
-
-The intended sequence is:
-
-1. Identify a repairable finding.
-2. Generate a repair proposal.
-3. Display the proposed changes.
-4. Ask the user for approval.
-5. Apply the approved proposal.
-6. Preserve the original file.
-7. Record the operation.
-8. Allow the user to inspect or reverse the change.
-
-The exact repair implementation depends on the diagnostic rule and supported repair mechanism.
-
-A repair should never be considered successful merely because a suggestion was generated.
-
-### 5.6 Automated Repair Workflow
-
-```powershell
-dnocer auto .
-```
-
-AUTO coordinates supported scanning and repair operations.
-
-It is not intended to mean unrestricted autonomous modification.
-
-Each proposed repair requires individual user approval.
-
-The workflow is designed to preserve user control and make repair outcomes reviewable.
-
-### 5.7 Repair History
-
-```powershell
-dnocer history .
-```
-
-DNOCER records repair information, including:
-
-- Change identifier.
-- Timestamp.
-- File.
-- Diagnostic rule.
-- Repair status.
-- Verification information.
-
-This allows developers to review previously recorded repair operations.
-
-### 5.8 Rollback
-
-```powershell
-dnocer undo .
-```
-
-Rollback uses retained repair information and backups to reverse recorded modifications.
-
-Rollback is an important recovery mechanism, but users should still maintain their own project backups.
-
-### 5.9 Version
-
-```powershell
-dnocer version
-```
-
-Displays the installed DNOCER version.
+> [!IMPORTANT]
+> Keep the `.dnocer` folder if you want to use rollback history later.
 
 ---
 
-## 6. Internal Architecture
+## 🤖 AI Integration
 
-DNOCER separates its terminal interface from reusable diagnostic and repair functionality.
+DNOCER can use the **Anthropic SDK** for extra explanations and investigation.
 
-### CLI Layer
+- ✅ AI is **optional**. Local diagnostics work without it.
+- ✅ A normal local scan **never** sends project data automatically.
+- ✅ AI commands show a **consent notice** first.
+- ✅ You should inspect the information before agreeing to send it.
+- ⚠️ AI output is **untrusted advice**.
+- ⚠️ AI recommendations never replace technical validation or your approval.
 
-Responsible for:
-
-- Command registration.
-- Argument handling.
-- User interaction.
-- Approval prompts.
-- Terminal output.
-- Workflow coordination.
-
-Primary implementation:
-
-`src/dnocer/cli.py`
-
-### Core Layer
-
-Responsible for shared project operations and reusable functionality.
-
-The core provides functionality used by workflows such as:
-
-- Project scanning.
-- Project context collection.
-- Test execution.
-- Repair proposal generation.
-- Repair application.
-- Repair history.
-- Rollback.
-
-Primary implementation:
-
-`src/dnocer/core.py`
-
-### Intelligence Layer
-
-The intelligence components provide additional analysis beyond basic diagnostic collection.
-
-Examples include:
-
-- Failure investigation.
-- Root-cause-oriented explanations.
-- Optional AI-assisted analysis.
-
-These components should distinguish available evidence from possible explanations.
-
-### External Tool Integration
-
-DNOCER integrates with development tools through Python subprocess execution where required.
-
-For example, Ruff is used for supported Python diagnostics and repair operations.
-
-Test execution is delegated to supported project test runners.
-
-DNOCER does not replace those underlying tools.
-
-### Local Repair State
-
-Repair history and retained backups are maintained in project-local DNOCER state.
-
-The `.dnocer` directory is used for repair-related records and backup information.
-
-Users should preserve this directory when they need the associated rollback history.
-
----
-
-## 7. AI Integration
-
-DNOCER includes optional AI-assisted analysis through the Anthropic SDK.
-
-AI may be used to provide additional explanations and investigation of project information.
-
-The AI layer is not the authority for whether a file modification is safe.
-
-Important principles:
-
-- AI functionality is optional.
-- Local diagnostic operations remain available independently of AI.
-- Project context is not sent automatically merely because the user runs an ordinary local scan.
-- AI-assisted commands display a consent notice.
-- The user should inspect the information before agreeing to send it.
-- AI output must be treated as untrusted advice.
-- AI recommendations do not replace technical validation or user approval.
-
-### API configuration
-
-Set the provider key through the environment variable:
+Set your key with an environment variable:
 
 ```text
 ANTHROPIC_API_KEY
 ```
 
-Never place API credentials directly inside source files or publish them in documentation.
+> [!CAUTION]
+> Never put API keys inside source files or publish them in documentation.
 
 ---
 
-## 8. Safety Model
+## 🔐 Safety Model
 
-DNOCER distinguishes two separate authorization concepts.
+Two separate kinds of authorization:
 
-### Human Authorization
+| 🙋 Human Authorization | 🔒 System Authorization |
+|---|---|
+| Approving a repair | Project path boundaries |
+| Allowing context to be sent to AI | File and syntax validation |
+| Confirming consequential actions | Repair restrictions |
+| | Execution limits |
 
-Human authorization represents the user's decision to approve an action.
+> [!WARNING]
+> Your confirmation does **not** make a prohibited operation safe, and automation must **not** silently replace your approval.
 
-Examples:
+**Repair integrity:** DNOCER preserves the original file, the proposed change, your approval decision, the resulting file, and the recorded state. The bytes applied match the approved proposal, as long as the source file has not changed since preview.
 
-- Approving a repair.
-- Authorizing selected project context to be sent to AI.
-- Confirming a consequential operation.
-
-### System Authorization
-
-System authorization represents the technical restrictions enforced by the application.
-
-Examples:
-
-- Project path boundaries.
-- File validation.
-- Syntax validation.
-- Repair restrictions.
-- Execution limits.
-
-These concepts must remain independent.
-
-A user confirmation does not make an otherwise prohibited operation safe.
-
-Similarly, system automation must not silently replace user approval where approval is required.
-
-### Repair Integrity
-
-A repair workflow should preserve:
-
-- The original file.
-- The proposed change.
-- The approval decision.
-- The resulting file.
-- The recorded repair state.
-
-DNOCER's exact-proposal repair mechanism is designed so that the bytes applied match the approved proposal, provided the source file has not changed since preview.
-
-### Important limitation
-
-No diagnostic tool can guarantee that every bug will be discovered or that every suggested repair is correct.
-
-Developers remain responsible for reviewing changes and validating their applications.
+> [!CAUTION]
+> No tool can find every bug or guarantee every repair is correct. You are still responsible for reviewing changes and testing your app.
 
 ---
 
-## 9. Technology Stack
+## 🧱 Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| Python | Main implementation language |
-| Typer | CLI command framework |
-| Rich | Terminal presentation |
-| Ruff | Supported Python linting and repair operations |
-| pytest | Supported project test execution |
-| SQLite | Local repair-history storage |
-| Anthropic SDK | Optional AI-assisted analysis |
-| setuptools | Python package building |
-
-The exact behavior of optional development tools depends on their availability in the environment.
+| 🐍 Python | Main language |
+| ⌨️ Typer | CLI framework |
+| 🎨 Rich | Terminal presentation |
+| 🧹 Ruff | Python linting and repair |
+| 🧪 pytest | Test execution |
+| 🗄️ SQLite | Local repair-history storage |
+| 🤖 Anthropic SDK | Optional AI analysis |
+| 📦 setuptools | Package building |
 
 ---
 
-## 10. Installation
-
-DNOCER is distributed as a Python package.
-
-Requirements:
-
-- Python 3.11 or newer.
-- Windows PowerShell, CMD, or a compatible terminal.
-- Required Python package dependencies.
-- An optional Anthropic API key for AI-assisted operations.
-
-Install from a built wheel:
+## 📦 Installation
 
 ```powershell
 python -m pip install dnocer-1.0.0-py3-none-any.whl
-```
-
-Verify:
-
-```powershell
 dnocer version
 dnocer --help
 ```
 
-For development and testing, install the development dependencies separately.
+**Requirements**
+
+- Python 3.11 or newer
+- Windows PowerShell, CMD, or compatible terminal
+- Required Python package dependencies
+- *(Optional)* Anthropic API key for AI features
+
+For development and testing, install the dev dependencies separately.
 
 ---
 
-## 11. Development Philosophy
+## 🚧 Limitations
 
-DNOCER is intended to support developers at different experience levels.
+DNOCER is **not**:
 
-For beginners, it should help explain what happened and where to investigate.
+- ❌ A replacement for an IDE, debugger, compiler, or interpreter
+- ❌ A guarantee of bug-free software
+- ❌ An unrestricted autonomous coding agent
+- ❌ A complete security scanner
+- ❌ A guarantee that every AI explanation is correct
+- ❌ A substitute for reviewing and testing code
 
-For independent developers, it should reduce repetitive diagnostic work.
-
-For experienced developers, it should provide a structured workflow for examining findings and reviewing changes.
-
-Its purpose is not to make developers dependent on automation.
-
-Its purpose is to improve their ability to understand, diagnose, and maintain software.
-
----
-
-## 12. Product Boundaries and Limitations
-
-DNOCER should not be understood as:
-
-- A replacement for an IDE.
-- A replacement for a debugger.
-- A replacement for compilers or interpreters.
-- A guarantee of bug-free software.
-- An unrestricted autonomous coding agent.
-- A complete security scanner.
-- A guarantee that every AI explanation is correct.
-- A substitute for reviewing and testing code.
-
-Its capabilities depend on the implemented diagnostic rules, supported tools, project configuration, and available evidence.
+What it can do depends on the implemented rules, supported tools, project setup, and available evidence.
 
 ---
 
-## 13. Relationship with IRABRAIN
+## 🧠 Relationship with IRABRAIN
 
-DNOCER is an independent developer tool under Azennix AI.
+| | DNOCER | IRABRAIN |
+|---|---|---|
+| **What** | Independent developer tool | Broader personal AI and adaptability product |
+| **Focus** | Software project intelligence and controlled workflows | Opportunities, capabilities, and personal or entrepreneurial goals |
 
-IRABRAIN is a broader personal AI and adaptability product.
-
-Their responsibilities should remain separate.
-
-DNOCER focuses on software project intelligence and controlled development workflows.
-
-IRABRAIN focuses on helping people understand opportunities, develop capabilities, and execute broader personal or entrepreneurial goals.
-
-Any future integration should be optional, documented, and consent-based.
-
-DNOCER should not duplicate IRABRAIN's core or self-development foundation.
+Their responsibilities stay **separate**. Any future integration should be optional, documented, and consent-based.
 
 ---
 
-## 14. Release Information
+## 🏷️ Release Info
 
-**Product:** DNOCER  
-**Organization:** Azennix AI  
-**Version:** 1.0.0  
-**Release type:** Initial major release  
-**Interface:** Command-line application  
-**Primary implementation:** Python  
-
-For detailed installation, command usage, safety policies, and release changes, refer to the accompanying documentation.
+| | |
+|---|---|
+| **Product** | DNOCER |
+| **Organization** | Azennix AI |
+| **Version** | 1.0.0 |
+| **Release type** | Initial major release |
+| **Interface** | Command-line application |
+| **Implementation** | Python |
 
 ---
 
-## 15. Final Principle
-
-DNOCER is built around a simple development philosophy:
-
-**Evidence before assumptions.  
-Understanding before modification.  
-Approval before consequential action.  
-Verification before claiming success.  
-Recovery when something goes wrong.**
-
-DNOCER — Your Companion. Your Capability. Your Control.
 <div align="center">
-  <p><strong>DNOCER</strong> · A developer tool by Azennix AI</p>
-  <p><em>Your Companion. Your Capability. Your Control.</em></p>
+
+## 🎯 Final Principle
+
+**Evidence before assumptions.**
+**Understanding before modification.**
+**Approval before consequential action.**
+**Verification before claiming success.**
+**Recovery when something goes wrong.**
+
+<br>
+
+**DNOCER** · A developer tool by **Azennix AI**
+
+*Your Companion. Your Capability. Your Control.*
+
 </div>

@@ -341,7 +341,7 @@ Two separate kinds of authorization:
 ## 📦 Installation
 
 ```powershell
-python -m pip install dnocer-1.0.0-py3-none-any.whl
+pip install dnocer
 dnocer version
 dnocer --help
 ```

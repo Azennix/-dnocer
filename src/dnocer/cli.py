@@ -27,8 +27,17 @@ from dnocer.intelligence.hunt.investigator import investigate_project
 app = typer.Typer(
     name="dnocer",
     help="Scan, explain, test, safely repair, remember, and undo.",
-    no_args_is_help=True,
+    no_args_is_help=False,
 )
+
+
+@app.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        from dnocer.branding import print_banner
+
+        print_banner(console)
+        console.print("\n[dim]Use 'dnocer --help' to explore commands.[/]")
 
 
 def consent():
@@ -1362,6 +1371,6 @@ def history_cmd(
 
 @app.command("version")
 def version_cmd():
-    from dnocer import __version__
+    from dnocer.branding import print_banner
 
-    console.print(f"DNOCER v{__version__}")
+    print_banner(console)

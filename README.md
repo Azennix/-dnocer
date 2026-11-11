@@ -2,15 +2,15 @@
 
 <img src="src/dnocer/assets/dnocer-terminal-animal.png" alt="DNOCER animal logo" width="200" />
 
-# 🛡️ DNOCER
+# DNOCER
 
 ### Project Intelligence & Safe Repair Companion
 
-**🔎 Evidence before assumptions · ✅ Approval before action · 🧪 Verification before success**
+**Evidence before assumptions · Approval before action · Verification before success**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
 ![Python](https://img.shields.io/badge/python-3.11%2B-yellow?style=for-the-badge&logo=python&logoColor=white)
-![Interface](https://img.shields.io/badge/interface-CLI-green?style=for-the-badge&logo=gnometerminal&logoColor=white)
+![Interface](https://img.shields.io/badge/interface-CLI-green?style=for-the-badge)
 ![AI](https://img.shields.io/badge/AI-optional-purple?style=for-the-badge)
 ![Local First](https://img.shields.io/badge/local--first-yes-orange?style=for-the-badge)
 
@@ -32,11 +32,11 @@ It combines **deterministic tools** (Ruff, pytest, Python parser) with **optiona
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ```powershell
 # 1. Install
-python -m pip install dnocer-1.0.0-py3-none-any.whl
+pip install dnocer
 
 # 2. Check it works
 dnocer version
@@ -51,29 +51,29 @@ dnocer scan .
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-1. [Why DNOCER exists](#-why-dnocer-exists)
-2. [What DNOCER does](#-what-dnocer-does)
-3. [Core principles](#-core-principles)
-4. [Commands](#-commands)
-5. [How each workflow works](#-how-each-workflow-works)
-6. [Architecture](#-architecture)
-7. [AI integration](#-ai-integration)
-8. [Safety model](#-safety-model)
-9. [Tech stack](#-tech-stack)
-10. [Installation](#-installation)
-11. [Limitations](#-limitations)
-12. [IRABRAIN](#-relationship-with-irabrain)
-13. [Release info](#-release-info)
+1. [Why DNOCER exists](#why-dnocer-exists)
+2. [What DNOCER does](#what-dnocer-does)
+3. [Core principles](#core-principles)
+4. [Commands](#commands)
+5. [How each workflow works](#how-each-workflow-works)
+6. [Architecture](#architecture)
+7. [AI integration](#ai-integration)
+8. [Safety model](#safety-model)
+9. [Tech stack](#tech-stack)
+10. [Installation](#installation)
+11. [Limitations](#limitations)
+12. [Relationship with IRABRAIN](#relationship-with-irabrain)
+13. [Release info](#release-info)
 
 ---
 
-## 🤔 Why DNOCER Exists
+## Why DNOCER Exists
 
 Developers deal with these problems every day:
 
-| 🐞 Problem | 😓 Pain |
+| Problem | Pain |
 |---|---|
 | Syntax and runtime errors | Hard to find the real cause |
 | Dependency and config issues | Time-consuming |
@@ -87,66 +87,66 @@ DNOCER closes the gap between **"something broke"** and **"I understand how to f
 
 ---
 
-## 🧰 What DNOCER Does
+## What DNOCER Does
 
 | # | Capability |
 |---|---|
-| 1 | 🔍 Project scanning and diagnostics |
-| 2 | 📋 Structured issue reporting |
-| 3 | 💡 Local explanations of problems |
-| 4 | 🤖 Optional AI-assisted investigation |
-| 5 | ⚠️ Risk-pattern identification |
-| 6 | 🧪 Test execution and result analysis |
-| 7 | 🛠️ Reviewable repair proposals |
-| 8 | ✅ Approval-controlled modifications |
-| 9 | ⏪ Repair history and rollback |
+| 1 | Project scanning and diagnostics |
+| 2 | Structured issue reporting |
+| 3 | Local explanations of problems |
+| 4 | Optional AI-assisted investigation |
+| 5 | Risk-pattern identification |
+| 6 | Test execution and result analysis |
+| 7 | Reviewable repair proposals |
+| 8 | Approval-controlled modifications |
+| 9 | Repair history and rollback |
 
 DNOCER works **alongside** your existing tools. It does not replace them.
 
 ---
 
-## 🧭 Core Principles
+## Core Principles
 
-### 🔎 Evidence before explanation
+### Evidence before explanation
 Every diagnosis should be backed by evidence: file locations, rule IDs, parser results, linter output, test results, error messages.
 
 > [!NOTE]
 > If the evidence only supports a *guess*, DNOCER must not present it as a *confirmed fact*.
 
-### ⚙️ Deterministic before generative
+### Deterministic before generative
 Conventional tools do the checks first: **Python syntax parsing**, **Ruff**, **existing test frameworks**. AI is an extra layer, never a replacement.
 
-### 🙋 Human authorization
+### Human authorization
 You see a repair proposal **before** any file is changed, and **you** decide whether to approve it.
 
-### 🔒 System authorization
+### System authorization
 Technical safety rules (allowed paths, validation, execution limits) are **separate** from your approval.
 
 > [!WARNING]
 > User approval can **never** bypass technical safety restrictions.
 
-### ✅ Verifiable outcomes
+### Verifiable outcomes
 Proposing a fix ≠ applying a fix ≠ a *successful* fix. DNOCER treats these as three different steps.
 
-### 🏠 Local-first
+### Local-first
 Core diagnostics run **locally**. AI features are optional and ask for **explicit consent** before any project context is sent out.
 
 ---
 
-## 💻 Commands
+## Commands
 
 Built with **Typer** (commands) and **Rich** (colorful terminal output).
 
 | Command | What it does |
 |---|---|
-| `dnocer scan` | 🔍 Analyze a project and show findings |
-| `dnocer test` | 🧪 Run tests and analyze results |
-| `dnocer hunt` | 🎯 Investigate risky code patterns |
-| `dnocer fix` | 🛠️ Preview and apply approved repairs |
-| `dnocer auto` | 🤝 Coordinate supported scan + repair workflows |
-| `dnocer undo` | ⏪ Reverse a recorded repair |
-| `dnocer history` | 📜 Show repair history |
-| `dnocer version` | 🏷️ Show installed version |
+| `dnocer scan` | Analyze a project and show findings |
+| `dnocer test` | Run tests and analyze results |
+| `dnocer hunt` | Investigate risky code patterns |
+| `dnocer fix` | Preview and apply approved repairs |
+| `dnocer auto` | Coordinate supported scan + repair workflows |
+| `dnocer undo` | Reverse a recorded repair |
+| `dnocer history` | Show repair history |
+| `dnocer version` | Show installed version |
 
 ```powershell
 dnocer --help
@@ -154,10 +154,10 @@ dnocer --help
 
 ---
 
-## 🔬 How Each Workflow Works
+## How Each Workflow Works
 
 <details open>
-<summary><b>🔍 Project Scanning</b> — <code>dnocer scan .</code></summary>
+<summary><b>Project Scanning</b> — <code>dnocer scan .</code></summary>
 
 <br>
 
@@ -168,7 +168,7 @@ Each finding can include: title, severity, diagnostic code, file and line, descr
 </details>
 
 <details>
-<summary><b>🧪 Test Intelligence</b> — <code>dnocer test .</code></summary>
+<summary><b>Test Intelligence</b> — <code>dnocer test .</code></summary>
 
 <br>
 
@@ -192,7 +192,7 @@ dnocer test . --ai        # optional AI investigation
 </details>
 
 <details>
-<summary><b>🎯 Risk Investigation</b> — <code>dnocer hunt .</code></summary>
+<summary><b>Risk Investigation</b> — <code>dnocer hunt .</code></summary>
 
 <br>
 
@@ -213,7 +213,7 @@ dnocer hunt . --ai   # optional AI-assisted review
 </details>
 
 <details>
-<summary><b>🛠️ Controlled Repair</b> — <code>dnocer fix .</code></summary>
+<summary><b>Controlled Repair</b> — <code>dnocer fix .</code></summary>
 
 <br>
 
@@ -234,7 +234,7 @@ dnocer hunt . --ai   # optional AI-assisted review
 </details>
 
 <details>
-<summary><b>🤝 Automated Repair</b> — <code>dnocer auto .</code></summary>
+<summary><b>Automated Repair</b> — <code>dnocer auto .</code></summary>
 
 <br>
 
@@ -243,7 +243,7 @@ Coordinates supported scanning and repair steps. It does **not** mean unrestrict
 </details>
 
 <details>
-<summary><b>📜 History</b> — <code>dnocer history .</code></summary>
+<summary><b>History</b> — <code>dnocer history .</code></summary>
 
 <br>
 
@@ -252,7 +252,7 @@ Records: change ID, timestamp, file, diagnostic rule, repair status, and verific
 </details>
 
 <details>
-<summary><b>⏪ Rollback</b> — <code>dnocer undo .</code></summary>
+<summary><b>Rollback</b> — <code>dnocer undo .</code></summary>
 
 <br>
 
@@ -265,31 +265,31 @@ Uses saved repair info and backups to reverse recorded changes.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 | Layer | Responsibility | File |
 |---|---|---|
-| 🖥️ **CLI** | Commands, arguments, prompts, approvals, terminal output | `src/dnocer/cli.py` |
-| ⚙️ **Core** | Scanning, context collection, test execution, repair proposal/apply, history, rollback | `src/dnocer/core.py` |
-| 🧠 **Intelligence** | Failure investigation, root-cause explanations, optional AI analysis | — |
-| 🔌 **External tools** | Ruff for lint/repair, pytest for tests (via subprocess) | — |
-| 💾 **Local state** | Repair history and backups in the `.dnocer` folder | `.dnocer/` |
+| **CLI** | Commands, arguments, prompts, approvals, terminal output | `src/dnocer/cli.py` |
+| **Core** | Scanning, context collection, test execution, repair proposal/apply, history, rollback | `src/dnocer/core.py` |
+| **Intelligence** | Failure investigation, root-cause explanations, optional AI analysis | — |
+| **External tools** | Ruff for lint/repair, pytest for tests (via subprocess) | — |
+| **Local state** | Repair history and backups in the `.dnocer` folder | `.dnocer/` |
 
 > [!IMPORTANT]
 > Keep the `.dnocer` folder if you want to use rollback history later.
 
 ---
 
-## 🤖 AI Integration
+## AI Integration
 
 DNOCER can use the **Anthropic SDK** for extra explanations and investigation.
 
-- ✅ AI is **optional**. Local diagnostics work without it.
-- ✅ A normal local scan **never** sends project data automatically.
-- ✅ AI commands show a **consent notice** first.
-- ✅ You should inspect the information before agreeing to send it.
-- ⚠️ AI output is **untrusted advice**.
-- ⚠️ AI recommendations never replace technical validation or your approval.
+- AI is **optional**. Local diagnostics work without it.
+- A normal local scan **never** sends project data automatically.
+- AI commands show a **consent notice** first.
+- You should inspect the information before agreeing to send it.
+- AI output is **untrusted advice**.
+- AI recommendations never replace technical validation or your approval.
 
 Set your key with an environment variable:
 
@@ -302,11 +302,11 @@ ANTHROPIC_API_KEY
 
 ---
 
-## 🔐 Safety Model
+## Safety Model
 
 Two separate kinds of authorization:
 
-| 🙋 Human Authorization | 🔒 System Authorization |
+| Human Authorization | System Authorization |
 |---|---|
 | Approving a repair | Project path boundaries |
 | Allowing context to be sent to AI | File and syntax validation |
@@ -323,22 +323,22 @@ Two separate kinds of authorization:
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |---|---|
-| 🐍 Python | Main language |
-| ⌨️ Typer | CLI framework |
-| 🎨 Rich | Terminal presentation |
-| 🧹 Ruff | Python linting and repair |
-| 🧪 pytest | Test execution |
-| 🗄️ SQLite | Local repair-history storage |
-| 🤖 Anthropic SDK | Optional AI analysis |
-| 📦 setuptools | Package building |
+| Python | Main language |
+| Typer | CLI framework |
+| Rich | Terminal presentation |
+| Ruff | Python linting and repair |
+| pytest | Test execution |
+| SQLite | Local repair-history storage |
+| Anthropic SDK | Optional AI analysis |
+| setuptools | Package building |
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```powershell
 pip install dnocer
@@ -357,22 +357,22 @@ For development and testing, install the dev dependencies separately.
 
 ---
 
-## 🚧 Limitations
+## Limitations
 
 DNOCER is **not**:
 
-- ❌ A replacement for an IDE, debugger, compiler, or interpreter
-- ❌ A guarantee of bug-free software
-- ❌ An unrestricted autonomous coding agent
-- ❌ A complete security scanner
-- ❌ A guarantee that every AI explanation is correct
-- ❌ A substitute for reviewing and testing code
+- A replacement for an IDE, debugger, compiler, or interpreter
+- A guarantee of bug-free software
+- An unrestricted autonomous coding agent
+- A complete security scanner
+- A guarantee that every AI explanation is correct
+- A substitute for reviewing and testing code
 
 What it can do depends on the implemented rules, supported tools, project setup, and available evidence.
 
 ---
 
-## 🧠 Relationship with IRABRAIN
+## Relationship with IRABRAIN
 
 | | DNOCER | IRABRAIN |
 |---|---|---|
@@ -383,7 +383,7 @@ Their responsibilities stay **separate**. Any future integration should be optio
 
 ---
 
-## 🏷️ Release Info
+## Release Info
 
 | | |
 |---|---|
@@ -398,7 +398,7 @@ Their responsibilities stay **separate**. Any future integration should be optio
 
 <div align="center">
 
-## 🎯 Final Principle
+## Final Principle
 
 **Evidence before assumptions.**
 **Understanding before modification.**

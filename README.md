@@ -1,8 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Azennix/dnocer/main/src/dnocer/assets/dnocer-logo.png" alt="DNOCER animal logo" width="150" />
+  <img src="src/dnocer/assets/dnocer-logo.png" alt="DNOCER animal logo" width="150" />
   <h1>DNOCER</h1>
-  <p><strong>Project Intelligence &amp; Safe Repair Companion</strong></p>
- # DNOCER
+  # DNOCER
 
 ### Project Intelligence & Safe Repair Companion
 

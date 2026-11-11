@@ -1,10 +1,12 @@
 <div align="center">
-  <img src="src/dnocer/assets/dnocer-terminal-animal.png" alt="DNOCER animal logo" width="190" />
+  <img src="src/dnocer/assets/dnocer-terminal-animal.png" alt="DNOCER animal logo" width="230" />
   <h1>DNOCER</h1>
   <p><strong>Evidence before assumptions · Approval before action · Verification before success</strong></p>
 
 
 ### Project Intelligence & Safe Repair Companion
+
+
 
 **A product by Azennix AI**
 

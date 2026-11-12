@@ -4,9 +4,10 @@ import json
 import os
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-
+from rich.console import Console
 
 DEFAULT_CLOUD_URL = "https://dnocer-cloud.onrender.com"
+console = Console()
 
 
 def investigate(question: str, context: str) -> str:
@@ -40,8 +41,14 @@ def investigate(question: str, context: str) -> str:
     )
 
     try:
-        with urlopen(request, timeout=65) as response:
-            data = json.loads(response.read().decode("utf-8"))
+        with console.status(
+            "[bold white]Connecting to DNOCER Cloud...[/]\n"
+            "[dim]If the server was idle, it may take "
+            "up to 1 minute to wake up. Please wait...[/]",
+            spinner="dots",
+        ):
+            with urlopen(request, timeout=65) as response:
+                data = json.loads(response.read().decode("utf-8"))
 
     except HTTPError as exc:
         raise RuntimeError(
